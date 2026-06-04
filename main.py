@@ -42,3 +42,11 @@ add_patient(name_input, int(age_input), history_input)
 search_patient(name_input)
 
 conn.close()
+def get_visit_count(patient_id):
+    conn = sqlite3.connect('clinic_system.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT COUNT(*) FROM visits WHERE patient_id = ?', (patient_id,))
+    count = cursor.fetchone()[0]
+    conn.close()
+    return count
+    
